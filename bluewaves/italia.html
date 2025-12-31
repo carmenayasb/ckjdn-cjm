@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+     <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blue Waves - Italia</title>
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/vendors/animate/animate.css">
+    <link rel="stylesheet" href="assets/css/foodhut.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <style>
+        body {
+            background: #0a1628;
+        }
+
+        /* Navbar personalizado Italia */
+        .custom-navbar.scrolled,
+        .custom-navbar.affix {
+            background: linear-gradient(135deg, #009246 0%, #ce2b37 100%) !important;
+        }
+
+        .custom-navbar .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+        }
+
+        .custom-navbar .nav-link:hover {
+            color: #f4f5f0 !important;
+        }
+
+        .custom-navbar.scrolled .brand-txt,
+        .custom-navbar.affix .brand-txt {
+            color: #ffffff !important;
+        }
+
+        /* Hero italiano con colores de la bandera */
+        .hero-section {
+            position: relative;
+            height: 80vh;
+            background: linear-gradient(135deg, #009246 0%, #ce2b37 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/imgs/italia.jpg') center/cover;
+            opacity: 0.3;
+        }
+
+        /* Detalle bandera italiana */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #009246 0%, #f4f5f0 33%, #f4f5f0 66%, #ce2b37 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .flag-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: wave 2s ease-in-out infinite;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Intro Section */
+        .intro-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #0a1628 0%, #0f1f3a 100%);
+            position: relative;
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #009246, #f4f5f0, #ce2b37, transparent);
+        }
+
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+        }
+
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #88c0f0;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        /* Cities Section */
+        .cities-section {
+            padding: 80px 0;
+            background: #0a1628;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #009246, #f4f5f0, #ce2b37);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #88c0f0;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        /* City Detail Card */
+        .city-detail {
+            background: linear-gradient(135deg, #0f1f3a 0%, #1a2942 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 146, 70, 0.2);
+            border-left: 5px solid #009246;
+            transition: all 0.3s ease;
+        }
+
+        .city-detail:hover {
+            box-shadow: 0 15px 50px rgba(206, 43, 55, 0.3);
+            border-left-color: #ce2b37;
+            transform: translateX(5px);
+        }
+
+        .city-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 146, 70, 0.3);
+        }
+
+        .city-header h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            margin-right: 15px;
+        }
+
+        .city-date {
+            background: linear-gradient(135deg, #009246, #00b359);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .city-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .city-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            height: 400px;
+        }
+
+        .city-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .city-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .city-description {
+            color: #ddd;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .city-description p {
+            margin-bottom: 15px;
+        }
+
+        .city-highlights {
+            background: rgba(0, 146, 70, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .city-highlights h4 {
+            color: #88c0f0;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .city-highlights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .city-highlights li {
+            color: #ddd;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .city-highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #009246;
+            font-weight: bold;
+        }
+
+        /* Map Section */
+        .city-map {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 146, 70, 0.3);
+        }
+
+        .city-map iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #0a1628 0%, #0f1f3a 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(0, 146, 70, 0.3);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(206, 43, 55, 0.4);
+            border-color: #ce2b37;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #009246, #00b359);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 146, 70, 0.5);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(206, 43, 55, 0.6);
+            background: linear-gradient(135deg, #ce2b37, #ff4757);
+            color: white;
+        }
+
+        @media (max-width: 992px) {
+            .city-content {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .flag-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+<</head>
+<body id="home">
+    
+    <!-- Navbar -->
+    <nav class="custom-navbar navbar navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="10">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+            </ul>
+            <a class="navbar-brand m-auto" href="index.html">
+                <img src="assets/imgs/logo.png" class="brand-img" alt="">
+                <span class="brand-txt">Blue Waves</span>
+            </a>
+            <ul class="navbar-nav">
+                 <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="flag-icon">🇮🇹</div>
+            <h1 class="hero-title">Italia</h1>
+            <p class="hero-subtitle">Arte, historia y dolce vita</p>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content wow fadeIn">
+                <h2 class="intro-title">La Bella Italia</h2>
+                <p class="intro-text">
+                    Italia es un museo al aire libre donde cada ciudad cuenta una historia milenaria. Desde 
+                    las ruinas romanas hasta el Renacimiento florentino, cada rincón respira arte y cultura.
+                </p>
+                <p class="intro-text">
+                    Bologna se convirtió en mi hogar durante un año, permitiéndome recorrer desde las románticas calles de Venecia hasta la costa amalfitana, pasando 
+                    por la eterna Roma y la cuna del Renacimiento. Italia no se visita, se vive y se siente 
+                    en cada sabor, en cada obra de arte y en cada atardecer.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Detail Section -->
+    <section class="cities-section">
+        <div class="container">
+            <h2 class="section-title wow fadeIn">Ciudades Visitadas</h2>
+            <p class="section-subtitle wow fadeIn">Un viaje por la historia y la belleza italiana</p>
+            
+            <!-- Roma -->
+            <div class="city-detail wow fadeInUp" data-wow-delay="0.1s">
+                <div class="city-header">
+                    <h3>Roma</h3>
+                    <span class="city-date">Mayo 2025</span>
+                </div>
+                <div class="city-content">
+                    <div class="city-image">
+                        <img src="assets/imgs/IMG_6438.jpg" alt="Roma">
+                    </div>
+                    <div class="city-description">
+                        <p>
+                            La Ciudad Eterna te deja sin palabras. Caminar por el Coliseo es sentir el peso 
+                            de la historia bajo tus pies. El Foro Romano, el Panteón y la Fontana di Trevi 
+                            son solo el comienzo de una ciudad que parece no tener fin.
+                        </p>
+                        <p>
+                            El Vaticano con la Capilla Sixtina te roba el aliento, el Trastevere te envuelve 
+                            con su encanto bohemio, y la gastronomía romana (carbonara, cacio e pepe, pizza al 
+                            taglio) es una experiencia en sí misma. Roma es caótica, hermosa y absolutamente 
+                            inolvidable.
+                        </p>
+                        <div class="city-highlights">
+                            <h4>📍 Lugares imprescindibles:</h4>
+                            <ul>
+                                <li>Coliseo y Foro Romano</li>
+                                <li>Ciudad del Vaticano y Capilla Sixtina</li>
+                                <li>Fontana di Trevi y Plaza de España</li>
+                                <li>Panteón y Plaza Navona</li>
+                                <li>Barrio de Trastevere</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="city-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95611.11257905638!2d12.4823236!3d41.9027835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f9928ebb%3A0xb90f770693656e38!2sRoma%2C%20Italia!5e0!3m2!1ses!2ses!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Florencia -->
+            <div class="city-detail wow fadeInUp" data-wow-delay="0.2s">
+                <div class="city-header">
+                    <h3>Florencia</h3>
+                    <span class="city-date">Septiembre 2024</span>
+                </div>
+                <div class="city-content">
+                    <div class="city-image">
+                        <img src="assets/imgs/IMG_5318.jpg" alt="Florencia">
+                    </div>
+                    <div class="city-description">
+                        <p>
+                            La cuna del Renacimiento. Florencia es arte puro en cada esquina. La Galería Uffizi 
+                            alberga obras maestras de Da Vinci, Miguel Ángel y Botticelli. El David de Miguel Ángel 
+                            en la Galería de la Academia es una experiencia que te marca para siempre.
+                        </p>
+                        <p>
+                            El Duomo con su cúpula de Brunelleschi domina el skyline, el Ponte Vecchio sobre el 
+                            Arno es pura magia, y Piazzale Michelangelo ofrece las mejores vistas al atardecer. 
+                            Florencia es pequeña, caminable y cada paso es un descubrimiento. La Toscana en su 
+                            máxima expresión.
+                        </p>
+                        <div class="city-highlights">
+                            <h4>📍 Lugares imprescindibles:</h4>
+                            <ul>
+                                <li>Galería Uffizi y Galería de la Academia</li>
+                                <li>Duomo y Campanile de Giotto</li>
+                                <li>Ponte Vecchio y Piazza della Signoria</li>
+                                <li>Piazzale Michelangelo (atardecer)</li>
+                                <li>Palacio Pitti y Jardines de Boboli</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="city-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46229.19926489415!2d11.2558136!3d43.7695604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a56a680d2d6ad%3A0x93d57917efc72a03!2sFlorencia%2C%20Italia!5e0!3m2!1ses!2ses!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Venecia -->
+            <div class="city-detail wow fadeInUp" data-wow-delay="0.3s">
+                <div class="city-header">
+                    <h3>Venecia</h3>
+                    <span class="city-date">Febrero 2025</span>
+                </div>
+                <div class="city-content">
+                    <div class="city-image">
+                        <img src="assets/imgs/IMG_5426.jpg" alt="Venecia">
+                    </div>
+                    <div class="city-description">
+                        <p>
+                            La ciudad flotante es pura magia. No hay coches, solo góndolas, vaporettos y puentes. 
+                            Perderse por sus callejuelas es la mejor manera de descubrirla. La Plaza San Marcos 
+                            con su basílica y el Campanile es impresionante, pero Venecia brilla en sus rincones 
+                            escondidos.
+                        </p>
+                        <p>
+                            Un paseo en góndola por el Gran Canal es turístico pero memorable. El Puente de Rialto, 
+                            el Palacio Ducal y el Puente de los Suspiros cuentan siglos de historia. Las islas de 
+                            Murano y Burano son escapadas perfectas. Venecia es única en el mundo, romántica y 
+                            misteriosa al mismo tiempo.
+                        </p>
+                        <div class="city-highlights">
+                            <h4>📍 Lugares imprescindibles:</h4>
+                            <ul>
+                                <li>Plaza San Marcos y Basílica</li>
+                                <li>Gran Canal y Puente de Rialto</li>
+                                <li>Palacio Ducal y Puente de los Suspiros</li>
+                                <li>Islas de Murano y Burano</li>
+                                <li>Sestiere de Cannaregio (auténtico)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="city-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44965.64824277894!2d12.3267859!3d45.4408474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477eb1daf1d63d89%3A0x7ba3c6f0bd92102f!2sVenecia%2C%20Italia!5e0!3m2!1ses!2ses!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Milán -->
+            <div class="city-detail wow fadeInUp" data-wow-delay="0.4s">
+                <div class="city-header">
+                    <h3>Milán</h3>
+                    <span class="city-date">Junio 2025</span>
+                </div>
+                <div class="city-content">
+                    <div class="city-image">
+                        <img src="assets/imgs/IMG_9617.jpg" alt="Milán">
+                    </div>
+                    <div class="city-description">
+                        <p>
+                            La capital de la moda es mucho más que pasarelas. El Duomo es una de las catedrales 
+                            góticas más impresionantes del mundo, y subir a sus terrazas ofrece vistas increíbles. 
+                            La Última Cena de Da Vinci en Santa Maria delle Grazie es un must absoluto (reservar 
+                            con meses de antelación).
+                        </p>
+                        <p>
+                            La Galería Vittorio Emanuele II es un centro comercial de lujo con arquitectura 
+                            espectacular. El Castillo Sforzesco, el barrio de Brera y los Navigli (canales) 
+                            muestran el alma de Milán. Es una ciudad moderna, dinámica y con muchísima historia. 
+                            El aperitivo milanés es toda una institución.
+                        </p>
+                        <div class="city-highlights">
+                            <h4>📍 Lugares imprescindibles:</h4>
+                            <ul>
+                                <li>Duomo di Milano y terrazas</li>
+                                <li>La Última Cena (Santa Maria delle Grazie)</li>
+                                <li>Galería Vittorio Emanuele II</li>
+                                <li>Castillo Sforzesco y Parque Sempione</li>
+                                <li>Barrio de Brera y Navigli</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="city-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89540.88913373244!2d9.1895106!3d45.4642035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c1493f1275e7%3A0x3cffcd13c6740e8d!2sMil%C3%A1n%2C%20Italia!5e0!3m2!1ses!2ses!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <a href="paises.html" class="back-btn" title="Volver a países">
+        <i class="ti-arrow-left"></i>
+    </a>
+
+    <!-- Footer -->
+    <div class="bg-dark text-light text-center border-top">
+        <p class="mb-0 py-3 text-muted small">&copy; Copyright <script>document.write(new Date().getFullYear())</script> Para vivir <i class="ti-heart text-danger"></i> By <a href="https://www.instagram.com/carmenayas">carmenayas</a></p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/vendors/wow/wow.js"></script>
+    <script src="assets/js/foodhut.js"></script>
+    <script>
+        new WOW().init();
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+    </script>
+
+</body>
+</html>
+

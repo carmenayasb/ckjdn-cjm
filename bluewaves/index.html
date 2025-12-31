@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with FoodHut landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Blue Waves</title>
+   
+    <!-- font icons -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/vendors/animate/animate.css">
+
+    <!-- Bootstrap + FoodHut main styles -->
+    <link rel="stylesheet" href="assets/css/foodhut.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <style>
+        /* Galería moderna con grid */
+        #gallary {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .gallery-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e90ff;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #1e90ff, #00bfff);
+            border-radius: 2px;
+        }
+
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 25px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 1;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(30, 144, 255, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 144, 255, 0.9), rgba(0, 191, 255, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 3rem;
+            transform: scale(0.5);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .gallery-item:hover .gallery-overlay i {
+            transform: scale(1);
+        }
+
+        /* Modal mejorado */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+        }
+
+        #imageModal .modal-dialog {
+            max-width: 90vw;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #imageModal .modal-content {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        #imageModal .modal-body {
+            padding: 0;
+            position: relative;
+        }
+
+        #modalImage {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: -50px;
+            top: -50px;
+            color: white !important;
+            opacity: 1 !important;
+            z-index: 1000;
+            font-size: 3rem !important;
+            width: 50px;
+            height: 50px;
+            background: rgba(30, 144, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-shadow: none;
+        }
+
+        .close:hover {
+            background: rgba(30, 144, 255, 0.5);
+            transform: rotate(90deg);
+        }
+
+        /* Botones de navegación mejorados */
+        .btn-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 144, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .btn-nav:hover {
+            background: rgba(30, 144, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .btn-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .btn-prev {
+            left: -80px;
+        }
+
+        .btn-next {
+            right: -80px;
+        }
+
+        /* Contador de imágenes mejorado */
+        .image-counter {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 144, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .gallery-header h2 {
+                font-size: 2rem;
+            }
+
+            .btn-prev, .btn-next {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+
+            .btn-prev {
+                left: 10px;
+            }
+            
+            .btn-next {
+                right: 10px;
+            }
+            
+            .close {
+                right: 10px !important;
+                top: 10px !important;
+                font-size: 2rem !important;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .image-counter {
+                bottom: 15px;
+                font-size: 0.9rem;
+                padding: 8px 20px;
+            }
+
+            #modalImage {
+                max-height: 70vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Efecto de carga */
+        .gallery-item {
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+        .gallery-item:nth-child(10) { animation-delay: 1s; }
+        .gallery-item:nth-child(11) { animation-delay: 1.1s; }
+        .gallery-item:nth-child(12) { animation-delay: 1.2s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    
+    <!-- Navbar -->
+    <nav class="custom-navbar navbar navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="10">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre mí</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#gallary">Galería</a>
+                </li>
+            </ul>
+            <a class="navbar-brand m-auto" href="#">
+                <img src="assets/imgs/logo.png" class="brand-img" alt="">
+                <span class="brand-txt">Blue Waves</span>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#blog">Últimos viajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="paises.html">Países</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- header -->
+    <header id="home" class="header has-bg-image">
+        <div class="overlay text-white text-center">
+            <h1 class="display-2 font-weight-bold my-3">Blue Waves</h1>
+            <h2 class="display-4 mb-5">Viajar es vivir</h2>
+            <a class="btn btn-lg btn-primary" href="#gallary">Galería de imágenes</a>
+        </div>
+    </header>
+
+    <!--  About Section  -->
+    <div id="about" class="container-fluid wow fadeIn" data-wow-duration="1.5s">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 py-5 my-5">
+                <div class="text-center mb-4">
+                    <img src="assets/imgs/sobremi.png" alt="Carmen" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover; border: 5px solid #1e90ff; box-shadow: 0 10px 30px rgba(30, 144, 255, 0.3);">
+                </div>
+                <h2 class="mb-4">Sobre mí</h2>
+                <p>¡Holaaa! Soy Carmen, la viajera detrás de Blue Waves. Mi pasión por descubrir nuevos lugares lleva conmigo desde que era pequeñita aunque no fue hasta los 18 años cuando salí por primera vez de España. Desde entonces no he dejado de explorar cada rincón que puedo.</p>
+
+                <p>Blue Waves nace de mi amor por el mar, la aventura y las historias que cada destino tiene para contar. Aquí comparto mis experiencias, consejos y momentos especiales de cada viaje, desde las playas mediterráneas hasta ciudades europeas llenas de encanto.</p>
+
+                <p><b>Mi filosofía: viajar es vivir, y cada destino es una nueva ola que nos transforma de una forma u otra.</b></p>
+
+                <p>A través de este blog quiero inspirarte a descubrir el mundo, ya sea planeando tu próxima escapada o simplemente soñando con futuros destinos. Sígueme en Instagram para ver más de mis aventuras y próximamente también en YouTube, donde compartiré vlogs y guías de viaje más detalladas.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galería Moderna -->
+    <section id="gallary">
+        <div class="gallery-header">
+            <h2>Galería de Viajes</h2>
+            <p>Momentos capturados alrededor del mundo</p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/imgs/gallary-1.jpg" alt="Viaje 1">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_9796.jpeg" alt="Viaje 2">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_0203.jpg" alt="Viaje 3">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_0735.jpg" alt="Viaje 4">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_2592.jpg" alt="Viaje 5">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_4098.jpg" alt="Viaje 6">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_5342.jpg" alt="Viaje 7">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/imgs/IMG_9380.jpg" alt="Viaje 8">
+                <div class="gallery-overlay">
+                    <i class="ti-search"></i>
+                </div>
+           
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para galería -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                    
+                    <button class="btn-nav btn-prev" id="prevImage">
+                        <i class="ti-angle-left"></i>
+                    </button>
+                    
+                    <img src="" id="modalImage" alt="">
+                    
+                    <button class="btn-nav btn-next" id="nextImage">
+                        <i class="ti-angle-right"></i>
+                    </button>
+                    
+                    <div class="image-counter">
+                        <span id="currentImage">1</span> / <span id="totalImages">12</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            let currentImageIndex = 0;
+            let galleryImages = [];
+            
+            // Recopilar todas las imágenes de la galería
+            $('.gallery-item img').each(function() {
+                galleryImages.push($(this).attr('src'));
+            });
+            
+            // Actualizar el total de imágenes
+            $('#totalImages').text(galleryImages.length);
+            
+            // Función para mostrar imagen
+            function showImage(index) {
+                currentImageIndex = index;
+                $('#modalImage').attr('src', galleryImages[index]);
+                $('#currentImage').text(index + 1);
+            }
+            
+            // Abrir modal al hacer clic en imagen
+            $('.gallery-item').click(function() {
+                let clickedIndex = $('.gallery-item').index(this);
+                showImage(clickedIndex);
+                $('#imageModal').modal('show');
+            });
+            
+            // Botón anterior
+            $('#prevImage').click(function() {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                showImage(currentImageIndex);
+            });
+            
+            // Botón siguiente
+            $('#nextImage').click(function() {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                showImage(currentImageIndex);
+            });
+            
+            // Navegación con teclado
+            $(document).keydown(function(e) {
+                if ($('#imageModal').hasClass('show')) {
+                    if (e.keyCode === 37) { // Flecha izquierda
+                        $('#prevImage').click();
+                    } else if (e.keyCode === 39) { // Flecha derecha
+                        $('#nextImage').click();
+                    } else if (e.keyCode === 27) { // ESC
+                        $('#imageModal').modal('hide');
+                    }
+                }
+            });
+
+            // Prevenir scroll cuando el modal está abierto
+            $('#imageModal').on('shown.bs.modal', function() {
+                $('body').css('overflow', 'hidden');
+            });
+
+            $('#imageModal').on('hidden.bs.modal', function() {
+                $('body').css('overflow', 'auto');
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- BLOG Section  -->
+    <div id="blog" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+        <h2 class="section-title py-5">Últimos Viajes</h2>
+        <div class="row justify-content-center">
+            <div class="col-sm-7 col-md-4 mb-5">
+                <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#foods" role="tab" aria-controls="pills-home" aria-selected="true">España</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#juices" role="tab" aria-controls="pills-profile" aria-selected="false">Extranjero</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="foods" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row">
+                    <!-- ENLACES A ESPAÑA -->
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border my-3 my-md-0">
+                            <img src="assets/imgs/IMG_6147.jpg" alt="Málaga" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a href="españa.html" class="badge badge-primary">Málaga</a></h1>
+                                <h4 class="pt20 pb20">Octubre 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border my-3 my-md-0">
+                            <img src="assets/imgs/IMG_8371.jpg" alt="Granada" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a href="españa.html" class="badge badge-primary">Granada</a></h1>
+                                <h4 class="pt20 pb20">Octubre 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border my-3 my-md-0">
+                            <img src="assets/imgs/IMG_2968.jpg" alt="Menorca" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a href="españa.html" class="badge badge-primary">Menorca</a></h1>
+                                <h4 class="pt20 pb20">Agosto 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="juices" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
+                    <!-- ENLACES A PAÍSES EXTRANJEROS -->
+                    <div class="col-md-4 my-3 my-md-0">
+                        <div class="card bg-transparent border">
+                            <img src="assets/imgs/blog-4.jpg" alt="London" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a href="reinounido.html" class="badge badge-primary">London</a></h1>
+                                <h4 class="pt20 pb20">Septiembre 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3 my-md-0">
+                        <div class="card bg-transparent border">
+                            <img src="assets/imgs/turin.jpg" alt="Torino" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a href="italia.html" class="badge badge-primary">Torino</a></h1>
+                                <h4 class="pt20 pb20">Julio 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3 my-md-0">
+                        <div class="card bg-transparent border">
+                            <img src="assets/imgs/IMG_2594.jpg" alt="Genoa" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a href="italia.html" class="badge badge-primary">Genoa</a></h1>
+                                <h4 class="pt20 pb20">Julio 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+   
+
+
+
+   
+    <div class="bg-dark text-light text-center border-top wow fadeIn">
+        <p class="mb-0 py-3 text-muted small">&copy; Copyright <script>document.write(new Date().getFullYear())</script> Para vivir <i class="ti-heart text-danger"></i> By <a href="https://www.instagram.com/carmenayas?igsh=MWV2dzVxcHAzdzlibA==">carmenayas</a></p>
+    </div>
+    <!-- end of page footer -->
+
+    <!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap affix -->
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- wow.js -->
+    <script src="assets/vendors/wow/wow.js"></script>
+    
+    <!-- google maps -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap"></script>
+
+    <!-- FoodHut js -->
+    <script src="assets/js/foodhut.js"></script>
+<!-- scripts -->
+<script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+<script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+<script src="assets/vendors/wow/wow.js"></script>
+<script src="assets/js/foodhut.js"></script>
+
+<script>
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+            $('.navbar').addClass('scrolled');
+        } else {
+            $('.navbar').removeClass('scrolled');
+        }
+    });
+</script>
+
+<!-- Modal para ampliar imágenes -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body p-0 position-relative">
+                <button type="button" class="close position-absolute" style="right: -40px; top: -40px; color: white; opacity: 1; z-index: 1000; font-size: 3rem;" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <img src="" id="modalImage" class="img-fluid rounded" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+#imageModal .modal-dialog {
+    max-width: 90vw;
+}
+#imageModal .modal-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+#imageModal .modal-body {
+    padding: 0;
+}
+#imageModal img {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+}
+#imageModal .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+</style>
+
+<script>
+// Script para abrir imágenes en modal
+$(document).ready(function() {
+    $('.gallary-item').click(function(e) {
+        e.preventDefault();
+        var imgSrc = $(this).find('.gallary-img').attr('src');
+        $('#modalImage').attr('src', imgSrc);
+        $('#imageModal').modal('show');
+    });
+});
+</script>
+</body>
+</html>
